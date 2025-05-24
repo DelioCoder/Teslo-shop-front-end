@@ -1,0 +1,33 @@
+<p class="text-2xl font-bold tracking-wider">Listado de productos</p>
+<p class="text-lg tracking-wider">
+    Total de productos
+    <span class="text-secondary tracking-wider">
+        {{ productResource.value()?.count }}
+    </span>
+</p>
+
+<div class="divider"></div>
+
+<div class="flex flex-row gap-4 items-center">
+    <app-pagination [pages]="pages()" [currentPage]="currentPage()" />
+
+    <select class="select select-bordered border-base-300 w-32 bg-slate-800"
+        (change)="perPage.set(+selectPerPage.value)" #selectPerPage>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+
+    <a class="btn btn-primary btn-sm" routerLink="/admin/product/new">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+
+        Nuevo Producto
+    </a>
+</div>
+
+<product-table [products]="products()" />
