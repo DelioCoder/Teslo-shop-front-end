@@ -1,1 +1,24 @@
-<p>product-page works!</p>
+@if( productResource.isLoading() ){
+    <div class="flex justify-center items-center h-screen">
+        <span class="loading loading-spinner loading-lg"></span>
+    </div>
+}
+
+@if( productResource.hasValue() ){
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <!-- carousel -->
+        <product-carousel [images]="productResource.value().images"></product-carousel>
+
+        <div>
+            <p>
+                {{ productResource.value().title }}
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+                {{ productResource.value().description }}
+            </p>
+        </div>
+    </div>
+}

@@ -1,1 +1,13 @@
-<p>home-page works!</p>
+<p class="text-3xl font-bold font-montserrat">Todos los productos</p>
+<p class="text-xl py-3">Para todo los gustos</p>
+
+<app-pagination [pages]="productsResponse.value()?.pages ?? 0" [currentPage]="paginationService.currentPage()" />
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-2 gap-8">
+    @for (product of productsResponse.value()?.products; track $index) {
+        <product-card [product]="product" />
+    }
+    @empty {
+        <p>No hay productos</p>
+    }
+</div>
