@@ -5,12 +5,12 @@
     <!-- Slides -->
     @for (image of images(); track $index) {
       <div class="swiper-slide">
-        <img [src]="image | productImage" alt="hola" class="w-full object-cover rounded-md animate-fadeIn" />
+        <img [src]="image | productImage" alt="hola" class="w-[100%] h-[100%] object-cover rounded-md animate-fadeIn" />
       </div>
     }
     @empty {
       <div class="swiper-slide">
-        <img [src]="null | productImage" alt="hola" class="w-full object-cover rounded-md animate-fadeIn" />
+        <img [src]="null | productImage" alt="hola" class="w-[100%] h-[100%] object-cover rounded-md animate-fadeIn" />
       </div>
     }
   </div>
