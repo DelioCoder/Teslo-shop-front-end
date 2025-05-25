@@ -11,6 +11,10 @@ export class ProductImagePipe implements PipeTransform {
         
         if(!value) return './assets/images/no-image.webp';
 
+        const blobExists = value.includes('blob:');
+
+        if (blobExists) return value as string;
+
         if (typeof value === "string") return `${baseUrl}/files/product/${value}`;
 
         const image = value.at(0);
