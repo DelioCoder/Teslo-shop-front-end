@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { RegisterFormInputs } from '@auth/interface/auth-input.interface';
 import { AuthResponse } from '@auth/interface/auth.interface';
 import { User } from '@auth/interface/user.interface';
@@ -13,6 +14,8 @@ const baseUrl = environment.baseUrl;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
+    private router = inject(Router);
 
     private _authStatus = signal<AuthStatus>(localStorage.getItem('token') ? 'checking' : 'not-authenticated');
 
@@ -82,6 +85,8 @@ export class AuthService {
         this._token.set(null);
 
         localStorage.removeItem('token');
+
+        this.router.navigateByUrl('/', { replaceUrl: true });
     }
 
     private handleAuthSuccess({ token, user }: AuthResponse) {
