@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { RegisterFormInputs } from '@auth/interface/auth-input.interface';
 import { AuthResponse } from '@auth/interface/auth.interface';
 import { User } from '@auth/interface/user.interface';
 import { catchError, map, Observable, of, tap } from 'rxjs';
@@ -85,8 +84,6 @@ export class AuthService {
         this._token.set(null);
 
         localStorage.removeItem('token');
-
-        this.router.navigateByUrl('/', { replaceUrl: true });
     }
 
     private handleAuthSuccess({ token, user }: AuthResponse) {
@@ -101,6 +98,7 @@ export class AuthService {
 
     private handleAuthError(error: any) {
         this.logout();
+        this._authStatus.set('not-authenticated');
         return of(false);
     }
 
